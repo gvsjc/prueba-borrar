@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAFE SCHOOLS | Anti-Bullying & Safe Spaces Initiative</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              charcoal: '#0b0f17',
+              navycard: '#121824',
+              navybright: '#1a2333',
+              gold: '#F5B800',
+              goldhover: '#e0a700',
+              crimson: '#E63946',
+              crimsonhover: '#c92a37',
+              cyanaccent: '#00b4d8'
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              display: ['Oswald', 'Montserrat', 'sans-serif'],
+            }
+          }
+        }
+      }
+    </script>
+
+    <!-- Google Fonts: Oswald & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+      .font-display {
+        font-family: 'Oswald', sans-serif;
+        letter-spacing: 0.02em;
+      }
+
+      /* Hero section dynamic background overlay matching WalkFree visual texture */
+      .hero-bg-overlay {
+        background: linear-gradient(
+          90deg, 
+          rgba(11, 15, 23, 0.92) 0%, 
+          rgba(11, 15, 23, 0.82) 45%, 
+          rgba(11, 15, 23, 0.65) 100%
+        );
+      }
+
+      /* Ribbon graphic banner visual effect */
+      .ribbon-banner {
+        background: linear-gradient(135deg, rgba(230, 57, 70, 0.88) 0%, rgba(180, 20, 35, 0.92) 100%);
+        backdrop-filter: blur(10px);
+        transform: rotate(-1.5deg);
+        box-shadow: -10px 15px 30px rgba(0, 0, 0, 0.5);
+      }
+
+      .glass-card {
+        background: rgba(18, 24, 36, 0.8);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .glass-card:hover {
+        border-color: rgba(245, 184, 0, 0.4);
+        transform: translateY(-4px);
+        box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.6);
+      }
+
+      /* WalkFree Yellow Action Buttons */
+      .btn-gold {
+        background-color: #F5B800;
+        color: #0b0f17;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        transition: all 0.2s ease;
+      }
+
+      .btn-gold:hover {
+        background-color: #e0a700;
+        transform: translateY(-1px);
+        box-shadow: 0 6px 20px rgba(245, 184, 0, 0.3);
+      }
+
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #0b0f17;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #1a2333;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #F5B800;
+      }
+    </style>
+</head>
+<body class="bg-charcoal text-slate-100 font-sans antialiased selection:bg-gold selection:text-black">
+
+    <!-- 1. Emergency Crisis Notice Banner -->
+    <div id="crisis-banner" class="bg-crimson text-white px-4 py-2 text-xs font-semibold relative z-50">
+      <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+        <div class="flex items-center gap-2">
+          <span class="bg-white text-crimson px-2 py-0.5 font-bold uppercase tracking-wider text-[10px] rounded">
+            <i class="fa-solid fa-triangle-exclamation mr-1"></i> Emergency Crisis Support
+          </span>
+          <span>In crisis or witnessing severe school bullying? Free 24/7 confidential help is available right now.</span>
+        </div>
+        <div class="flex items-center gap-4">
+          <button onclick="openCrisisModal()" class="underline font-bold hover:text-slate-200 transition">
+            <i class="fa-solid fa-phone-volume mr-1"></i> Helplines & Crisis Contacts
+          </button>
+          <button onclick="dismissCrisisBanner()" class="text-white/80 hover:text-white ml-2 text-sm" title="Dismiss Notice">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Header (WalkFree.org Style) -->
+    <header class="sticky top-0 z-40 bg-charcoal/90 backdrop-blur-md border-b border-white/10 transition-all duration-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+        
+        <!-- Logo -->
+        <a href="#" class="flex items-center gap-3 group">
+          <div class="w-10 h-10 rounded-lg bg-gold text-charcoal flex items-center justify-center font-black text-xl group-hover:scale-105 transition">
+            <i class="fa-solid fa-shield-cat"></i>
+          </div>
+          <div class="flex flex-col">
+            <span class="font-display text-2xl font-bold tracking-tight text-white leading-none">
+              SAFE<span class="text-gold">SCHOOLS</span>
+            </span>
+            <span class="text-[9px] uppercase tracking-widest text-slate-400 font-semibold mt-0.5">Safe Spaces Initiative</span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden md:flex items-center space-x-8 text-xs font-bold uppercase tracking-wider">
+          
+          <!-- Dropdown ABOUT -->
+          <div class="relative group py-6">
+            <a href="#about" class="text-slate-200 hover:text-gold transition flex items-center gap-1.5">
+              About <i class="fa-solid fa-chevron-down text-[10px] opacity-70 group-hover:rotate-180 transition-transform"></i>
+            </a>
+            <div class="absolute left-0 top-full hidden group-hover:block w-48 bg-navycard border border-slate-800 rounded-b-lg shadow-2xl py-2">
+              <a href="#about" class="block px-4 py-2 text-slate-300 hover:bg-navybright hover:text-gold transition text-xs">Our Mission</a>
+              <a href="#pillars" class="block px-4 py-2 text-slate-300 hover:bg-navybright hover:text-gold transition text-xs">What is a Safe Space?</a>
+              <a href="#stats" class="block px-4 py-2 text-slate-300 hover:bg-navybright hover:text-gold transition text-xs">Impact & Research</a>
+            </div>
+          </div>
+
+          <!-- Dropdown OUR APPROACH -->
+          <div class="relative group py-6">
+            <a href="#pillars" class="text-slate-200 hover:text-gold transition flex items-center gap-1.5">
+              Our Approach <i class="fa-solid fa-chevron-down text-[10px] opacity-70 group-hover:rotate-180 transition-transform"></i>
+            </a>
+            <div class="absolute left-0 top-full hidden group-hover:block w-52 bg-navycard border border-slate-800 rounded-b-lg shadow-2xl py-2">
+              <a href="#pillars" class="block px-4 py-2 text-slate-300 hover:bg-navybright hover:text-gold transition text-xs">4 Safe Space Pillars</a>
+              <a href="#audit" class="block px-4 py-2 text-slate-300 hover:bg-navybright hover:text-gold transition text-xs">School Safety Audit</a>
+              <a href="#pledge" class="block px-4 py-2 text-slate-300 hover:bg-navybright hover:text-gold transition text-xs">Take the Pledge</a>
+            </div>
+          </div>
+
+          <a href="#resources" class="text-slate-200 hover:text-gold transition">Resources</a>
+          <a href="#voices" class="text-slate-200 hover:text-gold transition">Voices</a>
+        </nav>
+
+        <!-- Right Header Action: WalkFree Search Button Box -->
+        <div class="hidden sm:flex items-center space-x-4">
+          <button onclick="toggleSearchModal()" class="px-4 py-2 border border-white/30 rounded text-xs font-bold uppercase tracking-wider text-slate-100 hover:border-gold hover:text-gold transition flex items-center gap-2">
+            <i class="fa-solid fa-magnifying-glass"></i> Search
+          </button>
+        </div>
+
+        <!-- Mobile Hamburger Trigger -->
+        <button onclick="toggleMobileMenu()" class="md:hidden text-slate-200 hover:text-gold text-2xl focus:outline-none">
+          <i class="fa-solid fa-bars" id="mobile-icon"></i>
+        </button>
+
+      </div>
+
+      <!-- Mobile Navigation Drawer -->
+      <div id="mobile-menu" class="hidden md:hidden bg-navycard border-b border-slate-800 px-6 py-6 space-y-4 text-xs font-bold uppercase tracking-wider">
+        <a href="#about" onclick="toggleMobileMenu()" class="block text-slate-200 hover:text-gold py-1">About</a>
+        <a href="#pillars" onclick="toggleMobileMenu()" class="block text-slate-200 hover:text-gold py-1">What is a Safe Space?</a>
+        <a href="#audit" onclick="toggleMobileMenu()" class="block text-slate-200 hover:text-gold py-1">Safety Audit Quiz</a>
+        <a href="#resources" onclick="toggleMobileMenu()" class="block text-slate-200 hover:text-gold py-1">Resources</a>
+        <a href="#pledge" onclick="toggleMobileMenu()" class="block text-slate-200 hover:text-gold py-1">Sign the Pledge</a>
+        <div class="pt-3 border-t border-slate-800 flex flex-col gap-2">
+          <button onclick="toggleSearchModal(); toggleMobileMenu()" class="w-full text-center py-2 border border-white/30 text-white rounded">
+            <i class="fa-solid fa-magnifying-glass mr-1"></i> Search Site
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- 2. HERO SECTION (Identical layout to user's WalkFree screenshot mockup) -->
+    <section class="relative min-h-[85vh] flex items-center justify-center bg-charcoal overflow-hidden select-none" id="hero-slider-section">
+      
+      <!-- Background Image with dynamic slide transition -->
+      <div id="hero-bg-image" class="absolute inset-0 bg-cover bg-center transition-all duration-700 transform scale-105" 
+           style="background-image: url('https://images.unsplash.com/photo-1577896851231-70ef18881754?w=1600&auto=format&fit=crop&q=80');">
+      </div>
+
+      <!-- Dark atmospheric gradient overlay -->
+      <div class="absolute inset-0 hero-bg-overlay"></div>
+
+      <!-- Main Hero Content Container -->
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10 w-full">
+        <div class="grid lg:grid-cols-12 gap-8 items-center">
+          
+          <!-- LEFT HERO BLOCK -->
+          <div class="lg:col-span-7 space-y-6">
+            <h1 class="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase text-white tracking-tight leading-[0.95]" id="hero-main-title">
+              WE ARE CREATING <br>
+              <span class="text-white">SAFE SPACES</span> <br>
+              <span class="text-white">AT SCHOOLS</span>
+            </h1>
+
+            <p class="text-lg sm:text-xl text-slate-200 font-normal max-w-xl leading-relaxed" id="hero-subtitle">
+              Together with students, educators, and your community
+            </p>
+
+            <div class="pt-4">
+              <a href="#pillars" id="hero-left-btn" class="inline-block btn-gold px-8 py-4 text-sm font-black rounded-sm tracking-widest shadow-xl">
+                WHAT IS A SAFE SPACE?
+              </a>
+            </div>
+          </div>
+
+          <!-- RIGHT HERO BLOCK (DYNAMIC RIBBON / BANNER CARD) -->
+          <div class="lg:col-span-5 relative mt-8 lg:mt-0">
+            
+            <div class="relative bg-navycard/90 border border-slate-700/80 rounded-lg p-8 sm:p-10 shadow-2xl overflow-hidden backdrop-blur-md">
+              
+              <!-- Red Ribbon Graphic Banner across card -->
+              <div class="absolute -right-12 top-6 bg-crimson text-white text-[10px] font-black uppercase tracking-widest px-12 py-1 rotate-45 shadow-lg">
+                URGENT FOCUS
+              </div>
+
+              <div class="space-y-4 relative z-10">
+                <span class="text-xs font-bold tracking-widest uppercase text-gold block" id="hero-right-tag">
+                  SCHOOL CLIMATE SURVEY 2026
+                </span>
+
+                <h2 class="font-display text-4xl sm:text-5xl font-extrabold uppercase text-white leading-none tracking-tight" id="hero-right-headline">
+                  MILLIONS <br>
+                  <span class="text-white">OF STUDENTS FACE</span> <br>
+                  <span class="text-white">BULLYING EVERY DAY</span>
+                </h2>
+
+                <p class="text-xs text-slate-300 leading-relaxed pt-2" id="hero-right-body">
+                  1 in 3 youth report being targeted in hallways, classrooms, and online. Safe Haven policies turn fear into belonging.
+                </p>
+
+                <div class="pt-4">
+                  <a href="#stats" id="hero-right-btn" class="inline-block btn-gold px-6 py-3.5 text-xs font-extrabold rounded-sm tracking-wider">
+                    EXPLORE THE IMPACT DATA
+                  </a>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <!-- HERO BOTTOM BAR (Photo credit & Interactive dots) -->
+      <div class="absolute bottom-4 inset-x-0 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-400 gap-2 z-20">
+        <div class="italic text-slate-300" id="hero-caption">
+          High school common area, Portland, Oregon. Photo Credit: Safe Schools Initiative
+        </div>
+
+        <!-- Slider Pagination Dots -->
+        <div class="flex items-center space-x-3">
+          <button onclick="setHeroSlide(0)" class="hero-dot w-3 h-3 rounded-full bg-gold transition-all" id="dot-0" title="Slide 1"></button>
+          <button onclick="setHeroSlide(1)" class="hero-dot w-2.5 h-2.5 rounded-full bg-white/40 hover:bg-white transition-all" id="dot-1" title="Slide 2"></button>
+          <button onclick="setHeroSlide(2)" class="hero-dot w-2.5 h-2.5 rounded-full bg-white/40 hover:bg-white transition-all" id="dot-2" title="Slide 3"></button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- 3. IMPACT STATS & DATA BAR -->
+    <section id="stats" class="py-20 bg-navycard border-y border-slate-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16 space-y-2">
+          <span class="text-gold text-xs font-extrabold uppercase tracking-widest">National School Climate Research</span>
+          <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-white uppercase">The Reality of Bullying Today</h2>
+          <p class="text-slate-400 text-xs sm:text-sm">Why structured, proactive safe space frameworks are non-negotiable for student well-being.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          
+          <div class="glass-card p-6 rounded border-l-4 border-l-crimson">
+            <div class="text-slate-400 text-[10px] font-extrabold uppercase tracking-widest mb-2">Targeted Students</div>
+            <div class="font-display text-5xl font-black text-white mb-2" id="counter-1">1 IN 3</div>
+            <p class="text-xs text-slate-300 leading-relaxed">Students report experiencing physical, verbal, or emotional bullying during the school year.</p>
+            <span class="block mt-4 text-[10px] text-slate-500 font-mono">Source: NCES Bullying Report</span>
+          </div>
+
+          <div class="glass-card p-6 rounded border-l-4 border-l-gold">
+            <div class="text-slate-400 text-[10px] font-extrabold uppercase tracking-widest mb-2">Chronic Absenteeism</div>
+            <div class="font-display text-5xl font-black text-white mb-2" id="counter-2">160,000+</div>
+            <p class="text-xs text-slate-300 leading-relaxed">Students miss school every day in the US due to fear of harassment and hallway violence.</p>
+            <span class="block mt-4 text-[10px] text-slate-500 font-mono">Source: National Education Association</span>
+          </div>
+
+          <div class="glass-card p-6 rounded border-l-4 border-l-cyanaccent">
+            <div class="text-slate-400 text-[10px] font-extrabold uppercase tracking-widest mb-2">Bystander Power</div>
+            <div class="font-display text-5xl font-black text-white mb-2" id="counter-3">57%</div>
+            <p class="text-xs text-slate-300 leading-relaxed">Of bullying situations stop within 10 seconds when a trained student peer steps in.</p>
+            <span class="block mt-4 text-[10px] text-slate-500 font-mono">Source: Youth Violence Prevention Study</span>
+          </div>
+
+          <div class="glass-card p-6 rounded border-l-4 border-l-emerald-500">
+            <div class="text-slate-400 text-[10px] font-extrabold uppercase tracking-widest mb-2">Safe Space Gap</div>
+            <div class="font-display text-5xl font-black text-white mb-2" id="counter-4">85%</div>
+            <p class="text-xs text-slate-300 leading-relaxed">Of schools lack formal, certified safe zone protocols or anonymous reporting systems.</p>
+            <span class="block mt-4 text-[10px] text-slate-500 font-mono">Source: Safe Schools National Audit</span>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 4. "WHAT IS A SAFE SPACE?" PILLAR BREAKDOWN -->
+    <section id="pillars" class="py-24 bg-charcoal">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+          <span class="bg-gold/10 text-gold border border-gold/30 text-[11px] font-extrabold px-3 py-1 uppercase tracking-widest rounded-full">
+            Core Methodology
+          </span>
+          <h2 class="font-display text-4xl sm:text-5xl font-extrabold text-white uppercase">4 Pillars of a Certified Safe Space</h2>
+          <p class="text-slate-400 text-sm">A Safe Space is more than a room. It is a comprehensive school culture where every student is physically protected, mentally supported, and empowered to thrive.</p>
+        </div>
+
+        <!-- Interactive Tabs Navigation -->
+        <div class="flex flex-wrap justify-center gap-3 mb-12" id="pillar-tab-buttons">
+          <button onclick="switchPillarTab(0)" class="pillar-tab-btn active-tab px-6 py-3 rounded-sm font-display text-sm font-bold uppercase tracking-wider bg-gold text-charcoal shadow-lg transition" data-index="0">
+            1. Physical & Mental Sanctuary
+          </button>
+          <button onclick="switchPillarTab(1)" class="pillar-tab-btn px-6 py-3 rounded-sm font-display text-sm font-bold uppercase tracking-wider bg-navycard text-slate-300 hover:text-white border border-slate-800 transition" data-index="1">
+            2. Upstander Empowerment
+          </button>
+          <button onclick="switchPillarTab(2)" class="pillar-tab-btn px-6 py-3 rounded-sm font-display text-sm font-bold uppercase tracking-wider bg-navycard text-slate-300 hover:text-white border border-slate-800 transition" data-index="2">
+            3. Confidential Reporting
+          </button>
+          <button onclick="switchPillarTab(3)" class="pillar-tab-btn px-6 py-3 rounded-sm font-display text-sm font-bold uppercase tracking-wider bg-navycard text-slate-300 hover:text-white border border-slate-800 transition" data-index="3">
+            4. Inclusive Anti-Bias Standards
+          </button>
+        </div>
+
+        <!-- Pillar Display Card -->
+        <div class="glass-card rounded-lg p-8 sm:p-12 border border-slate-800" id="pillar-card-display">
+          <!-- Injected via JavaScript -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 5. SCHOOL CLIMATE SAFETY AUDIT (Interactive Quiz) -->
+    <section id="audit" class="py-24 bg-navycard border-t border-slate-800 relative">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center mb-12 space-y-3">
+          <span class="text-crimson font-extrabold text-xs uppercase tracking-widest bg-crimson/10 px-3 py-1 rounded-full border border-crimson/30">
+            Interactive Safety Diagnostic
+          </span>
+          <h2 class="font-display text-4xl font-extrabold text-white uppercase">Is Your School Truly a Safe Space?</h2>
+          <p class="text-slate-400 text-xs sm:text-sm max-w-xl mx-auto">
+            Take this 5-question assessment to evaluate your school's anti-bullying readiness and receive customized action recommendations.
+          </p>
+        </div>
+
+        <!-- Quiz Box Container -->
+        <div class="glass-card bg-charcoal/90 rounded-lg border border-slate-700 p-6 sm:p-10 shadow-2xl relative" id="quiz-box shadow-2xl">
+          
+          <!-- Progress Header -->
+          <div class="mb-8">
+            <div class="flex justify-between items-center text-xs font-bold uppercase text-slate-400 mb-2">
+              <span id="quiz-step-title">Question 1 of 5</span>
+              <span id="quiz-step-percent" class="text-gold">20% Completed</span>
+            </div>
+            <div class="w-full h-2 bg-navycard rounded-full overflow-hidden">
+              <div id="quiz-progress-bar" class="h-full bg-gold transition-all duration-300 w-1/5"></div>
+            </div>
+          </div>
+
+          <!-- Question Content Box -->
+          <div id="quiz-question-area" class="space-y-6">
+            <!-- Dynamic quiz questions injected by JS -->
+          </div>
+
+          <!-- Quiz Result Box (Hidden by default) -->
+          <div id="quiz-result-area" class="hidden text-center space-y-6">
+            <!-- Result injected by JS -->
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 6. RESOURCE TOOLKIT LIBRARY -->
+    <section id="resources" class="py-24 bg-charcoal">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-12 gap-6">
+          <div>
+            <span class="text-gold text-xs font-extrabold uppercase tracking-widest">Free Advocacy & Action Kits</span>
+            <h2 class="font-display text-4xl font-extrabold text-white uppercase mt-2">Anti-Bullying Resource Library</h2>
+            <p class="text-slate-400 text-xs sm:text-sm mt-1 max-w-lg">Download battle-tested templates, de-escalation guides, and legal advocacy framework toolkits.</p>
+          </div>
+
+          <!-- Audience Filter Buttons -->
+          <div class="flex flex-wrap gap-2" id="resource-category-filters">
+            <button onclick="filterResourceCategory('all')" class="res-cat-btn px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-sm bg-gold text-charcoal transition" data-cat="all">
+              All Resources
+            </button>
+            <button onclick="filterResourceCategory('students')" class="res-cat-btn px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-sm bg-navycard text-slate-300 border border-slate-800 hover:text-white transition" data-cat="students">
+              For Students
+            </button>
+            <button onclick="filterResourceCategory('educators')" class="res-cat-btn px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-sm bg-navycard text-slate-300 border border-slate-800 hover:text-white transition" data-cat="educators">
+              For Educators
+            </button>
+            <button onclick="filterResourceCategory('parents')" class="res-cat-btn px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-sm bg-navycard text-slate-300 border border-slate-800 hover:text-white transition" data-cat="parents">
+              For Parents
+            </button>
+          </div>
+        </div>
+
+        <!-- Resource Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="resources-cards-grid">
+          <!-- Injected via JavaScript -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 7. DYNAMIC PLEDGE WALL ("Stand With Us") -->
+    <section id="pledge" class="py-24 bg-navycard border-t border-slate-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="grid lg:grid-cols-12 gap-12 items-start">
+          
+          <!-- Pledge Submission Form -->
+          <div class="lg:col-span-5 glass-panel p-8 rounded border border-slate-700 space-y-6 sticky top-28">
+            <div>
+              <span class="text-gold text-xs font-extrabold uppercase tracking-widest block mb-1">Take Action Today</span>
+              <h2 class="font-display text-3xl font-extrabold text-white uppercase">Sign the Safe Schools Pledge</h2>
+              <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+                Join thousands of students, teachers, and parents pledging to build inclusive, zero-harassment learning environments.
+              </p>
+            </div>
+
+            <form id="pledge-form" onsubmit="handlePledgeSubmit(event)" class="space-y-4">
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-300 mb-1">Your Full Name</label>
+                <input type="text" id="pledge-name" required placeholder="e.g. Marcus Vance" class="w-full bg-charcoal border border-slate-700 rounded px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-gold transition">
+              </div>
+
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-xs font-bold uppercase text-slate-300 mb-1">Your Role</label>
+                  <select id="pledge-role" required class="w-full bg-charcoal border border-slate-700 rounded px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-gold transition">
+                    <option value="Student">Student</option>
+                    <option value="Educator">Educator</option>
+                    <option value="Parent">Parent / Guardian</option>
+                    <option value="Community Ally">Community Ally</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-bold uppercase text-slate-300 mb-1">School / City</label>
+                  <input type="text" id="pledge-school" required placeholder="e.g. Portland High, OR" class="w-full bg-charcoal border border-slate-700 rounded px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-gold transition">
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold uppercase text-slate-300 mb-1">Your Personal Statement</label>
+                <textarea id="pledge-statement" required rows="3" placeholder="I pledge to foster empathy, stand up against bullying, and make my school a safe space for everyone." class="w-full bg-charcoal border border-slate-700 rounded px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-gold transition resize-none"></textarea>
+              </div>
+
+              <button type="submit" class="w-full btn-gold py-3.5 rounded text-xs font-black shadow-lg flex items-center justify-center gap-2">
+                <i class="fa-solid fa-pen-nib"></i> ADD MY NAME TO THE PLEDGE WALL
+              </button>
+            </form>
+          </div>
+
+          <!-- Dynamic Live Pledge Feed -->
+          <div class="lg:col-span-7 space-y-6">
+            
+            <div class="bg-charcoal p-6 rounded border border-slate-800 flex items-center justify-between">
+              <div>
+                <span class="text-[10px] font-extrabold uppercase tracking-widest text-slate-400">Total Voices Committed</span>
+                <div class="font-display text-4xl font-extrabold text-gold mt-1 flex items-center gap-3">
+                  <span id="pledge-count-total">24,108</span>
+                  <span class="text-xs font-sans font-normal bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/30">Live Nationwide</span>
+                </div>
+              </div>
+              <i class="fa-solid fa-shield-heart text-4xl text-gold/30"></i>
+            </div>
+
+            <!-- Role Filter Bar for Pledges -->
+            <div class="flex items-center justify-between text-xs text-slate-400 border-b border-slate-800 pb-2">
+              <span class="font-bold uppercase tracking-wider">Recent Safe School Commitments</span>
+              <div class="flex gap-3">
+                <button onclick="filterPledgeFeed('All')" class="pledge-feed-filter active-pledge-filter text-gold font-bold underline" data-role="All">All</button>
+                <button onclick="filterPledgeFeed('Student')" class="pledge-feed-filter hover:text-white" data-role="Student">Students</button>
+                <button onclick="filterPledgeFeed('Educator')" class="pledge-feed-filter hover:text-white" data-role="Educator">Educators</button>
+              </div>
+            </div>
+
+            <!-- Scrollable Cards Container -->
+            <div id="pledges-feed-container" class="space-y-4 max-h-[550px] overflow-y-auto pr-2">
+              <!-- Injected via JavaScript -->
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 8. VOICES OF CHANGE (Testimonials & Impact Stories) -->
+    <section id="voices" class="py-24 bg-charcoal">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16 space-y-2">
+          <span class="text-gold text-xs font-extrabold uppercase tracking-widest">Real Stories from Classrooms</span>
+          <h2 class="font-display text-4xl font-extrabold text-white uppercase">Voices of Change</h2>
+          <p class="text-slate-400 text-xs sm:text-sm">How dedicated Safe Spaces are transforming students' lives every day.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          
+          <div class="glass-card p-6 rounded border border-slate-800 flex flex-col justify-between space-y-6">
+            <div class="space-y-4">
+              <div class="text-gold text-xs flex gap-1">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </div>
+              <p class="text-xs text-slate-300 italic leading-relaxed">
+                "Having a designated Safe Space in my high school gave me a place to catch my breath when anxiety spiked. It truly saved my mental health and academic future."
+              </p>
+            </div>
+            <div class="pt-4 border-t border-slate-800 flex items-center gap-3">
+              <div class="w-10 h-10 rounded bg-gold/20 text-gold font-bold flex items-center justify-center font-display">
+                AP
+              </div>
+              <div>
+                <h4 class="text-xs font-bold text-white uppercase">Aria P.</h4>
+                <p class="text-[10px] text-slate-400">11th Grade Student, Oregon</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass-card p-6 rounded border border-slate-800 flex flex-col justify-between space-y-6">
+            <div class="space-y-4">
+              <div class="text-gold text-xs flex gap-1">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </div>
+              <p class="text-xs text-slate-300 italic leading-relaxed">
+                "The Upstander Bystander Kit transformed my middle school classroom. Behavioral referrals dropped by 65% in just one term."
+              </p>
+            </div>
+            <div class="pt-4 border-t border-slate-800 flex items-center gap-3">
+              <div class="w-10 h-10 rounded bg-crimson/20 text-crimson font-bold flex items-center justify-center font-display">
+                DR
+              </div>
+              <div>
+                <h4 class="text-xs font-bold text-white uppercase">David Rivera</h4>
+                <p class="text-[10px] text-slate-400">Middle School Principal, Illinois</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass-card p-6 rounded border border-slate-800 flex flex-col justify-between space-y-6">
+            <div class="space-y-4">
+              <div class="text-gold text-xs flex gap-1">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </div>
+              <p class="text-xs text-slate-300 italic leading-relaxed">
+                "When my daughter was targeted online, the school's confidential reporting policy allowed us to address it quickly without making her feel unsafe."
+              </p>
+            </div>
+            <div class="pt-4 border-t border-slate-800 flex items-center gap-3">
+              <div class="w-10 h-10 rounded bg-cyanaccent/20 text-cyanaccent font-bold flex items-center justify-center font-display">
+                SK
+              </div>
+              <div>
+                <h4 class="text-xs font-bold text-white uppercase">Sarah K.</h4>
+                <p class="text-[10px] text-slate-400">Parent & PTA President, Ohio</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 9. FOOTER & NEWSLETTER -->
+    <footer class="bg-navycard border-t border-slate-800 text-slate-400 text-xs py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        
+        <!-- Newsletter Signup Bar -->
+        <div class="bg-charcoal p-8 rounded border border-slate-700 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div class="space-y-1 text-center md:text-left">
+            <h3 class="font-display text-xl font-bold text-white uppercase">STAY INFORMED. PROTECT OUR YOUTH.</h3>
+            <p class="text-xs text-slate-400">Receive quarterly school safety research, policy tools, and event invitations.</p>
+          </div>
+          <form onsubmit="handleNewsletter(event)" class="flex w-full md:w-auto gap-2">
+            <input type="email" required placeholder="Enter your email address" class="bg-navycard border border-slate-700 rounded px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-gold w-full sm:w-64">
+            <button type="submit" class="btn-gold px-6 py-2.5 rounded font-black text-xs shrink-0">
+              SUBSCRIBE
+            </button>
+          </form>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pt-4">
+          
+          <div class="space-y-3">
+            <div class="flex items-center gap-2">
+              <div class="w-8 h-8 rounded bg-gold text-charcoal flex items-center justify-center font-black">
+                <i class="fa-solid fa-shield-cat"></i>
+              </div>
+              <span class="font-display font-bold text-white text-lg">SAFE SCHOOLS</span>
+            </div>
+            <p class="text-[11px] text-slate-400 leading-relaxed">
+              Advocating for zero-tolerance bullying policies, confidential reporting tools, and certified safe learning spaces nationwide.
+            </p>
+          </div>
+
+          <div>
+            <h4 class="font-display text-sm font-bold text-white uppercase tracking-wider mb-3">Quick Links</h4>
+            <ul class="space-y-2 text-[11px]">
+              <li><a href="#about" class="hover:text-gold transition">About the Initiative</a></li>
+              <li><a href="#pillars" class="hover:text-gold transition">4 Safe Space Pillars</a></li>
+              <li><a href="#audit" class="hover:text-gold transition">School Safety Audit</a></li>
+              <li><a href="#resources" class="hover:text-gold transition">Free Resource Library</a></li>
+              <li><a href="#pledge" class="hover:text-gold transition">Sign National Pledge</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="font-display text-sm font-bold text-white uppercase tracking-wider mb-3">Crisis Resources</h4>
+            <ul class="space-y-2 text-[11px]">
+              <li class="flex items-center gap-2 text-crimson font-bold"><i class="fa-solid fa-phone"></i> 988 Crisis Lifeline</li>
+              <li class="flex items-center gap-2 text-slate-300"><i class="fa-solid fa-comment-sms"></i> Text HOME to 741741</li>
+              <li class="flex items-center gap-2 text-slate-300"><i class="fa-solid fa-shield"></i> StopBullying.gov Portal</li>
+              <li class="flex items-center gap-2 text-slate-300"><i class="fa-solid fa-heart-pulse"></i> The Trevor Project</li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="font-display text-sm font-bold text-white uppercase tracking-wider mb-3">Connect & Share</h4>
+            <div class="flex gap-3 text-lg text-slate-400 mb-4">
+              <a href="#" class="hover:text-gold transition"><i class="fa-brands fa-twitter"></i></a>
+              <a href="#" class="hover:text-gold transition"><i class="fa-brands fa-instagram"></i></a>
+              <a href="#" class="hover:text-gold transition"><i class="fa-brands fa-facebook"></i></a>
+              <a href="#" class="hover:text-gold transition"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+            <span class="text-[10px] text-slate-500 block">Styled after human rights advocacy frameworks like WalkFree.org</span>
+          </div>
+
+        </div>
+
+        <div class="pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-500 gap-4">
+          <p>&copy; 2026 SAFE SCHOOLS Initiative. All Rights Reserved.</p>
+          <div class="flex gap-4">
+            <a href="#" class="hover:text-slate-400">Privacy Policy</a>
+            <a href="#" class="hover:text-slate-400">Terms of Advocacy</a>
+            <a href="#" class="hover:text-slate-400">Accessibility</a>
+          </div>
+        </div>
+
+      </div>
+    </footer>
+
+    <!-- SEARCH OVERLAY MODAL -->
+    <div id="search-modal" class="fixed inset-0 z-50 flex items-start justify-center pt-24 px-4 bg-charcoal/95 backdrop-blur-md hidden">
+      <div class="max-w-2xl w-full glass-card p-6 rounded-lg border border-slate-700 space-y-4 relative">
+        <button onclick="toggleSearchModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <h3 class="font-display text-lg font-bold text-white uppercase">Search Safe Schools Network</h3>
+        
+        <div class="relative">
+          <input type="text" id="search-input" onkeyup="performSearch()" placeholder="Type key phrases e.g. 'bystander', 'reporting', 'toolkit'..." class="w-full bg-charcoal border border-slate-600 rounded px-4 py-3 text-sm text-white focus:outline-none focus:border-gold">
+          <i class="fa-solid fa-magnifying-glass absolute right-4 top-3.5 text-slate-400"></i>
+        </div>
+
+        <div id="search-results" class="max-h-60 overflow-y-auto space-y-2 pt-2 text-xs">
+          <p class="text-slate-500 italic">Enter a keyword above to search resources and guides.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- EMERGENCY HELPLINE MODAL -->
+    <div id="crisis-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden">
+      <div class="glass-card bg-navycard rounded-lg border border-crimson/50 max-w-lg w-full p-6 sm:p-8 space-y-5 relative">
+        
+        <button onclick="closeCrisisModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <div class="flex items-center gap-3 text-crimson">
+          <div class="p-3 rounded bg-crimson/20 text-2xl font-black">
+            <i class="fa-solid fa-circle-exclamation"></i>
+          </div>
+          <div>
+            <h3 class="font-display text-xl font-black text-white uppercase">Immediate Crisis Helplines</h3>
+            <p class="text-xs text-crimson font-bold">24/7 Confidential Assistance</p>
+          </div>
+        </div>
+
+        <p class="text-xs text-slate-300 leading-relaxed">
+          If a student is in immediate physical danger, experiencing acute distress, or facing severe harassment, contact these services immediately:
+        </p>
+
+        <div class="space-y-3 text-xs">
+          <div class="p-3.5 rounded bg-charcoal border border-slate-700 flex items-center justify-between">
+            <div>
+              <h4 class="font-bold text-white">988 Suicide & Crisis Lifeline</h4>
+              <p class="text-slate-400 text-[11px]">Free call or text 24/7</p>
+            </div>
+            <a href="tel:988" class="btn-gold px-3 py-1.5 rounded text-[11px]">Call 988</a>
+          </div>
+
+          <div class="p-3.5 rounded bg-charcoal border border-slate-700 flex items-center justify-between">
+            <div>
+              <h4 class="font-bold text-white">Crisis Text Line</h4>
+              <p class="text-slate-400 text-[11px]">Text HOME to 741741</p>
+            </div>
+            <button onclick="copyToClipboard('741741')" class="bg-slate-700 hover:bg-slate-600 text-white font-bold px-3 py-1.5 rounded text-[11px]">Copy Number</button>
+          </div>
+
+          <div class="p-3.5 rounded bg-charcoal border border-slate-700 flex items-center justify-between">
+            <div>
+              <h4 class="font-bold text-white">The Trevor Project (LGBTQ+ Youth)</h4>
+              <p class="text-slate-400 text-[11px]">Call 1-866-488-7386</p>
+            </div>
+            <a href="tel:18664887386" class="bg-purple-600 hover:bg-purple-500 text-white font-bold px-3 py-1.5 rounded text-[11px]">Call Now</a>
+          </div>
+        </div>
+
+        <button onclick="closeCrisisModal()" class="w-full py-2.5 rounded bg-slate-800 text-slate-300 text-xs font-bold hover:bg-slate-700">
+          Close Window
+        </button>
+
+      </div>
+    </div>
+
+    <!-- RESOURCE DETAIL MODAL -->
+    <div id="resource-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden">
+      <div class="glass-card bg-navycard rounded-lg border border-slate-700 max-w-lg w-full p-6 sm:p-8 space-y-5 relative">
+        <button onclick="closeResourceModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div id="resource-modal-body"></div>
+      </div>
+    </div>
+
+    <!-- Toast Notification Box -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 hidden bg-navycard border border-gold text-white px-5 py-3.5 rounded shadow-2xl flex items-center gap-3 text-xs font-bold">
+      <i class="fa-solid fa-circle-check text-gold text-lg"></i>
+      <span id="toast-text">Notification message</span>
+    </div>
+
+    <script>
+      /* --- HERO SLIDER DATA (WalkFree Style Hero Switches) --- */
+      const heroSlides = [
+        {
+          bgImage: "https://images.unsplash.com/photo-1577896851231-70ef18881754?w=1600&auto=format&fit=crop&q=80",
+          mainTitle: `WE ARE CREATING <br><span class="text-white">SAFE SPACES</span> <br><span class="text-white">AT SCHOOLS</span>`,
+          subtitle: "Together with students, educators, and your community",
+          leftBtnText: "WHAT IS A SAFE SPACE?",
+          rightTag: "SCHOOL CLIMATE SURVEY 2026",
+          rightHeadline: `MILLIONS <br><span class="text-white">OF STUDENTS FACE</span> <br><span class="text-white">BULLYING EVERY DAY</span>`,
+          rightBody: "1 in 3 youth report being targeted in hallways, classrooms, and online. Safe Haven policies turn fear into belonging.",
+          caption: "High school common area, Portland, Oregon. Photo Credit: Safe Schools Initiative"
+        },
+        {
+          bgImage: "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=1600&auto=format&fit=crop&q=80",
+          mainTitle: `EMPOWERING <br><span class="text-white">ACTIVE STUDENT</span> <br><span class="text-white">UPSTANDERS</span>`,
+          subtitle: "57% of bullying stops within seconds when peers intervene",
+          leftBtnText: "GET BYSTANDER KIT",
+          rightTag: "PEER DEFENSE STRATEGY",
+          rightHeadline: `TRANSFORM <br><span class="text-white">PASSIVE BYSTANDERS</span> <br><span class="text-white">INTO BRAVE ALLIES</span>`,
+          rightBody: "Equipping students with non-violent distraction & support tools to defend targeted classmates.",
+          caption: "Student leadership summit, Austin, Texas. Photo Credit: Youth Safety Network"
+        },
+        {
+          bgImage: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1600&auto=format&fit=crop&q=80",
+          mainTitle: `ZERO TOLERANCE <br><span class="text-white">FOR HARASSMENT</span> <br><span class="text-white">& EXCLUSION</span>`,
+          subtitle: "Confidential reporting tools protecting student safety without retaliation fear",
+          leftBtnText: "AUDIT YOUR SCHOOL",
+          rightTag: "POLICY REFORM 2026",
+          rightHeadline: `ANONYMOUS <br><span class="text-white">REPORTING SAVES</span> <br><span class="text-white">STUDENT LIVES</span>`,
+          rightBody: "Providing encrypted 24/7 digital tip boxes so victims and witnesses can speak up freely.",
+          caption: "Classroom workshop session, Chicago, Illinois. Photo Credit: Safe Schools Initiative"
+        }
+      ];
+
+      let currentHeroSlide = 0;
+
+      function setHeroSlide(index) {
+        currentHeroSlide = index;
+        const slide = heroSlides[index];
+
+        document.getElementById('hero-bg-image').style.backgroundImage = `url('${slide.bgImage}')`;
+        document.getElementById('hero-main-title').innerHTML = slide.mainTitle;
+        document.getElementById('hero-subtitle').innerText = slide.subtitle;
+        document.getElementById('hero-left-btn').innerText = slide.leftBtnText;
+        document.getElementById('hero-right-tag').innerText = slide.rightTag;
+        document.getElementById('hero-right-headline').innerHTML = slide.rightHeadline;
+        document.getElementById('hero-right-body').innerText = slide.rightBody;
+        document.getElementById('hero-caption').innerText = slide.caption;
+
+        for (let i = 0; i < 3; i++) {
+          const dot = document.getElementById(`dot-${i}`);
+          if (i === index) {
+            dot.className = "hero-dot w-3 h-3 rounded-full bg-gold transition-all";
+          } else {
+            dot.className = "hero-dot w-2.5 h-2.5 rounded-full bg-white/40 hover:bg-white transition-all";
+          }
+        }
+      }
+
+      // Auto cycle hero slider every 7 seconds
+      setInterval(() => {
+        currentHeroSlide = (currentHeroSlide + 1) % heroSlides.length;
+        setHeroSlide(currentHeroSlide);
+      }, 7000);
+
+      /* --- PILLARS DATA --- */
+      const pillars = [
+        {
+          title: "Physical & Mental Sanctuary",
+          icon: "fa-shield-heart",
+          tagline: "Dedicated Rooms and Sanctuary Badges",
+          description: "Every school must provide a physical 'Quiet Safe Zone' and display visible 'Safe Space Ally' decals on participating classroom doors. These zones guarantee zero-judgment, sensory calming tools, and instant counselor access.",
+          keyPoints: [
+            "Designated quiet reset space available during all periods",
+            "Door badges signaling trained, empathetic adult allies",
+            "Clear zero-mocking ground rules enforced at all times"
+          ]
+        },
+        {
+          title: "Upstander Empowerment (4Ds)",
+          icon: "fa-hand-holding-hand",
+          tagline: "Shifting from Bystanders to Active Defenders",
+          description: "Over 80% of bullying occurs in front of peers. We train students in four non-violent intervention methods: Direct (calmly speaking up), Distract (creating a diversion), Delegate (getting help), and Delay (checking in on the victim).",
+          keyPoints: [
+            "Practical 4D intervention tactics taught in assemblies",
+            "Student-led Safety Peer Ambassador teams",
+            "Recognition for courageous peer inclusion efforts"
+          ]
+        },
+        {
+          title: "Confidential Reporting",
+          icon: "fa-user-secret",
+          tagline: "Eliminating Fear of Peer Retaliation",
+          description: "Fear of being labeled a 'snitch' prevents victims from speaking up. Safe Schools provides encrypted digital tip systems and physical reporting drop-boxes managed exclusively by neutral counselors.",
+          keyPoints: [
+            "24/7 online anonymous incident reporting tool",
+            "Enforceable anti-retaliation rules for reporting students",
+            "Mandatory 24-hour administrator response protocol"
+          ]
+        },
+        {
+          title: "Inclusive Anti-Bias Standards",
+          icon: "fa-users-viewfinder",
+          tagline: "Protecting Minority & Vulnerable Youth",
+          description: "Bullying disproportionately targets minority, neurodivergent, and LGBTQ+ students. Safe Space policies enforce strict anti-bias rules, honor diverse identities, and actively promote belonging.",
+          keyPoints: [
+            "Anti-bias and cyber-safety modules in health curriculum",
+            "Zero tolerance for discriminatory slurs or hate speech",
+            "Supportive clubs celebrating diversity and neurodiversity"
+          ]
+        }
+      ];
+
+      function switchPillarTab(index) {
+        const p = pillars[index];
+        const buttons = document.querySelectorAll('.pillar-tab-btn');
+        buttons.forEach((btn, i) => {
+          if (i === index) {
+            btn.className = "pillar-tab-btn active-tab px-6 py-3 rounded-sm font-display text-sm font-bold uppercase tracking-wider bg-gold text-charcoal shadow-lg transition";
+          } else {
+            btn.className = "pillar-tab-btn px-6 py-3 rounded-sm font-display text-sm font-bold uppercase tracking-wider bg-navycard text-slate-300 hover:text-white border border-slate-800 transition";
+          }
+        });
+
+        const display = document.getElementById('pillar-card-display');
+        display.innerHTML = `
+          <div class="grid lg:grid-cols-12 gap-8 items-center">
+            <div class="lg:col-span-8 space-y-4">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded bg-gold/20 text-gold flex items-center justify-center font-bold text-xl">
+                  <i class="fa-solid ${p.icon}"></i>
+                </div>
+                <span class="text-xs font-bold uppercase tracking-widest text-gold">${p.tagline}</span>
+              </div>
+              <h3 class="font-display text-3xl font-extrabold text-white uppercase">${p.title}</h3>
+              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">${p.description}</p>
+              
+              <div class="pt-2">
+                <h4 class="text-xs font-bold uppercase text-white tracking-wider mb-2">Key Implementation Requirements:</h4>
+                <ul class="space-y-2 text-xs text-slate-300">
+                  ${p.keyPoints.map(pt => `
+                    <li class="flex items-start gap-2">
+                      <i class="fa-solid fa-circle-check text-gold mt-0.5"></i>
+                      <span>${pt}</span>
+                    </li>
+                  `).join('')}
+                </ul>
+              </div>
+            </div>
+
+            <div class="lg:col-span-4 bg-charcoal p-6 rounded border border-slate-700 text-center space-y-4">
+              <i class="fa-solid ${p.icon} text-5xl text-gold/40"></i>
+              <h4 class="font-display text-xl font-bold text-white uppercase">Ready to Implement?</h4>
+              <p class="text-xs text-slate-400">Download the complete action blueprint for Pillar ${index + 1}.</p>
+              <a href="#resources" class="inline-block btn-gold px-4 py-2.5 rounded text-xs font-bold w-full">
+                DOWNLOAD GUIDE PDF
+              </a>
+            </div>
+          </div>
+        `;
+      }
+
+      /* --- QUIZ DATA --- */
+      const quizQuestions = [
+        {
+          question: "1. Does your school have an anonymous, zero-retaliation reporting mechanism?",
+          options: [
+            { text: "Yes, an encrypted digital tool or physical drop-box guarantees anonymity.", pts: 3 },
+            { text: "Students can talk to counselors, but fear peers will find out.", pts: 2 },
+            { text: "No confidential reporting system exists.", pts: 1 }
+          ]
+        },
+        {
+          question: "2. Are there designated, quiet 'Safe Zone' classrooms staffed by adult allies?",
+          options: [
+            { text: "Yes, clearly marked classrooms with Safe Space decals exist.", pts: 3 },
+            { text: "A few friendly teachers exist, but no official designated spaces.", pts: 2 },
+            { text: "No designated safe spaces exist in the building.", pts: 1 }
+          ]
+        },
+        {
+          question: "3. Do students receive formal training on how to safely intervene as Upstanders?",
+          options: [
+            { text: "Yes, practical bystander intervention strategies (4Ds) are taught annually.", pts: 3 },
+            { text: "Anti-bullying is discussed in assemblies, but no hands-on skills are taught.", pts: 2 },
+            { text: "No bystander training is provided.", pts: 1 }
+          ]
+        },
+        {
+          question: "4. How strictly are microaggressions, slurs, and cyberbullying addressed?",
+          options: [
+            { text: "Proactive restorative response and zero tolerance for hate speech.", pts: 3 },
+            { text: "Action is taken only after major physical fights occur.", pts: 2 },
+            { text: "Harassment is frequently dismissed or ignored.", pts: 1 }
+          ]
+        },
+        {
+          question: "5. Does your school climate foster belonging for minority and neurodivergent youth?",
+          options: [
+            { text: "High belonging: active inclusion programs and anti-bias policies.", pts: 3 },
+            { text: "Moderate: peaceful, but subtle exclusionary behavior persists.", pts: 2 },
+            { text: "High tension: vulnerable students frequently experience isolation.", pts: 1 }
+          ]
+        }
+      ];
+
+      let currentQuizStep = 0;
+      let quizScore = 0;
+
+      function renderQuizStep(step) {
+        const q = quizQuestions[step];
+        const area = document.getElementById('quiz-question-area');
+        
+        document.getElementById('quiz-step-title').innerText = `Question ${step + 1} of 5`;
+        document.getElementById('quiz-step-percent').innerText = `${(step + 1) * 20}% Completed`;
+        document.getElementById('quiz-progress-bar').style.width = `${(step + 1) * 20}%`;
+
+        area.innerHTML = `
+          <h3 class="font-display text-xl sm:text-2xl font-bold text-white uppercase leading-snug">${q.question}</h3>
+          <div class="space-y-3 pt-2">
+            ${q.options.map((opt) => `
+              <button onclick="handleQuizAnswer(${opt.pts})" class="w-full text-left p-4 rounded bg-navycard hover:bg-navybright border border-slate-700 hover:border-gold transition text-xs sm:text-sm text-slate-200 font-medium flex items-center justify-between group">
+                <span>${opt.text}</span>
+                <i class="fa-solid fa-chevron-right text-slate-600 group-hover:text-gold transition"></i>
+              </button>
+            `).join('')}
+          </div>
+        `;
+      }
+
+      function handleQuizAnswer(pts) {
+        quizScore += pts;
+        currentQuizStep++;
+        if (currentQuizStep < quizQuestions.length) {
+          renderQuizStep(currentQuizStep);
+        } else {
+          showQuizResults();
+        }
+      }
+
+      function showQuizResults() {
+        document.getElementById('quiz-question-area').classList.add('hidden');
+        const resArea = document.getElementById('quiz-result-area');
+        resArea.classList.remove('hidden');
+
+        let title = "";
+        let badge = "";
+        let desc = "";
+
+        if (quizScore >= 13) {
+          title = "Certified Model Safe Haven";
+          badge = "High Safety Index";
+          desc = "Your school exhibits strong proactive reporting systems, active upstander culture, and trusted adult sanctuary spaces.";
+        } else if (quizScore >= 9) {
+          title = "Developing Refuge";
+          badge = "Moderate Safety Index";
+          desc = "Good foundations exist, but confidential reporting systems or formal bystander training require immediate strengthening.";
+        } else {
+          title = "High-Risk Environment";
+          badge = "Urgent Action Advised";
+          desc = "Students face elevated risks of unaddressed bullying and isolation. Structural Safe Space protocols should be adopted immediately.";
+        }
+
+        resArea.innerHTML = `
+          <div class="space-y-4">
+            <span class="inline-block px-3 py-1 rounded text-xs font-bold uppercase tracking-widest bg-gold/20 text-gold border border-gold/40">${badge}</span>
+            <h3 class="font-display text-3xl font-black text-white uppercase">${title}</h3>
+            <div class="font-display text-5xl font-black text-gold">${quizScore} / 15 SCORE</div>
+            <p class="text-xs sm:text-sm text-slate-300 max-w-lg mx-auto leading-relaxed">${desc}</p>
+            <div class="pt-4 flex flex-wrap justify-center gap-3">
+              <button onclick="resetQuiz()" class="px-5 py-2.5 rounded bg-slate-800 text-slate-300 hover:bg-slate-700 text-xs font-bold uppercase">
+                Retake Assessment
+              </button>
+              <a href="#resources" class="btn-gold px-6 py-2.5 rounded text-xs font-bold uppercase">
+                Download Action Toolkit
+              </a>
+            </div>
+          </div>
+        `;
+      }
+
+      function resetQuiz() {
+        currentQuizStep = 0;
+        quizScore = 0;
+        document.getElementById('quiz-result-area').classList.add('hidden');
+        document.getElementById('quiz-question-area').classList.remove('hidden');
+        renderQuizStep(0);
+      }
+
+      /* --- RESOURCES DATA --- */
+      const resourcesList = [
+        {
+          id: 1,
+          cat: "students",
+          tag: "Student Guide",
+          title: "4D Upstander Pocket Intervention Card",
+          desc: "Quick-reference action guide on how to safely intervene during hallway or online bullying.",
+          type: "PDF Download (1.8 MB)"
+        },
+        {
+          id: 2,
+          cat: "educators",
+          tag: "Educator Tool",
+          title: "Classroom Safe Zone Decal & Charter",
+          desc: "Printable door badge and classroom agreement poster establishing zero-tolerance rules.",
+          type: "Print Poster PDF (A3)"
+        },
+        {
+          id: 3,
+          cat: "parents",
+          tag: "Parent Kit",
+          title: "Cyberbullying Incident & Evidence Log",
+          desc: "Documentation sheet for logging digital harassment, screenshots, and school escalation letters.",
+          type: "Editable Word / PDF"
+        },
+        {
+          id: 4,
+          cat: "educators",
+          tag: "Staff Manual",
+          title: "Verbal De-Escalation Scriptbook",
+          desc: "Teacher scripts for defusing public mocking and hallway conflicts without escalating tension.",
+          type: "Comprehensive Guide"
+        },
+        {
+          id: 5,
+          cat: "students",
+          tag: "Student Club",
+          title: "Safe Haven Club Starter Blueprint",
+          desc: "Constitution, advisor pitches, and meeting agendas to launch an official student advocacy club.",
+          type: "Starter Kit PDF"
+        },
+        {
+          id: 6,
+          cat: "parents",
+          tag: "Parent Guide",
+          title: "School Administration Meeting Checklist",
+          desc: "Structured questions to ask principals when addressing unhandled bullying situations.",
+          type: "Interactive Checklist"
+        }
+      ];
+
+      function renderResources(cat) {
+        const grid = document.getElementById('resources-cards-grid');
+        const filtered = cat === 'all' ? resourcesList : resourcesList.filter(r => r.cat === cat);
+
+        grid.innerHTML = filtered.map(r => `
+          <div class="glass-card p-6 rounded border border-slate-800 flex flex-col justify-between space-y-4">
+            <div class="space-y-3">
+              <span class="px-2 py-0.5 rounded bg-gold/10 text-gold border border-gold/30 text-[10px] font-extrabold uppercase tracking-wider">${r.tag}</span>
+              <h3 class="font-display text-xl font-bold text-white uppercase leading-tight">${r.title}</h3>
+              <p class="text-xs text-slate-300 leading-relaxed">${r.desc}</p>
+            </div>
+            <div class="pt-3 border-t border-slate-800 flex items-center justify-between text-xs">
+              <span class="text-slate-500 text-[11px] font-mono">${r.type}</span>
+              <button onclick="openResourceModal(${r.id})" class="text-gold hover:text-white font-bold flex items-center gap-1 transition">
+                View Kit <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      function filterResourceCategory(cat) {
+        document.querySelectorAll('.res-cat-btn').forEach(btn => {
+          if (btn.dataset.cat === cat) {
+            btn.className = "res-cat-btn px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-sm bg-gold text-charcoal transition";
+          } else {
+            btn.className = "res-cat-btn px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-sm bg-navycard text-slate-300 border border-slate-800 hover:text-white transition";
+          }
+        });
+        renderResources(cat);
+      }
+
+      function openResourceModal(id) {
+        const r = resourcesList.find(x => x.id === id);
+        const modal = document.getElementById('resource-modal');
+        const body = document.getElementById('resource-modal-body');
+
+        body.innerHTML = `
+          <div class="space-y-4">
+            <span class="px-2 py-0.5 rounded bg-gold/20 text-gold text-xs font-bold uppercase">${r.tag}</span>
+            <h3 class="font-display text-2xl font-black text-white uppercase">${r.title}</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">${r.desc}</p>
+            <div class="p-4 rounded bg-charcoal border border-slate-800 text-xs space-y-1">
+              <p class="text-slate-400">Format: <strong class="text-white">${r.type}</strong></p>
+              <p class="text-slate-400">License: <strong class="text-white">Open Educational Resource (Free to distribute)</strong></p>
+            </div>
+            <button onclick="downloadSim('${r.title}')" class="w-full btn-gold py-3 rounded text-xs font-black uppercase">
+              Download Materials Now
+            </button>
+          </div>
+        `;
+        modal.classList.remove('hidden');
+      }
+
+      function closeResourceModal() {
+        document.getElementById('resource-modal').classList.add('hidden');
+      }
+
+      function downloadSim(title) {
+        showToast(`Downloading "${title}"... PDF ready!`);
+        closeResourceModal();
+      }
+
+      /* --- PLEDGE WALL LOGIC --- */
+      let pledges = [
+        { name: "Maya Lin", role: "Student", school: "Lincoln High, OR", msg: "I pledge to invite anyone sitting alone to join our lunch table.", date: "5 mins ago" },
+        { name: "Coach Robert Vance", role: "Educator", school: "Westlake Academy, TX", msg: "I promise zero tolerance for locker room bullying in my sports programs.", date: "40 mins ago" },
+        { name: "Elena Rostova", role: "Parent", school: "Chicago Public Schools, IL", msg: "Standing for safe, empathetic classrooms for all children.", date: "2 hours ago" }
+      ];
+
+      function renderPledges(roleFilter) {
+        const container = document.getElementById('pledges-feed-container');
+        const filtered = roleFilter === 'All' ? pledges : pledges.filter(p => p.role === roleFilter);
+
+        container.innerHTML = filtered.map(p => `
+          <div class="glass-card p-4 rounded border border-slate-800 space-y-2">
+            <div class="flex justify-between items-start">
+              <div class="flex items-center gap-2">
+                <span class="font-bold text-white text-xs">${p.name}</span>
+                <span class="text-[9px] px-2 py-0.5 rounded bg-gold/10 text-gold border border-gold/30 font-bold uppercase">${p.role}</span>
+              </div>
+              <span class="text-[10px] text-slate-500 font-mono">${p.date}</span>
+            </div>
+            <p class="text-xs text-slate-300 italic">"${p.msg}"</p>
+            <div class="text-[10px] text-slate-400 font-semibold">
+              <i class="fa-solid fa-location-dot text-gold mr-1"></i> ${p.school}
+            </div>
+          </div>
+        `).join('');
+      }
+
+      function filterPledgeFeed(role) {
+        document.querySelectorAll('.pledge-feed-filter').forEach(btn => {
+          if (btn.dataset.role === role) {
+            btn.className = "pledge-feed-filter text-gold font-bold underline";
+          } else {
+            btn.className = "pledge-feed-filter hover:text-white";
+          }
+        });
+        renderPledges(role);
+      }
+
+      function handlePledgeSubmit(e) {
+        e.preventDefault();
+        const name = document.getElementById('pledge-name').value;
+        const role = document.getElementById('pledge-role').value;
+        const school = document.getElementById('pledge-school').value;
+        const msg = document.getElementById('pledge-statement').value;
+
+        pledges.unshift({ name, role, school, msg, date: "Just now" });
+        renderPledges('All');
+
+        const totalEl = document.getElementById('pledge-count-total');
+        let val = parseInt(totalEl.innerText.replace(/,/g, '')) || 24108;
+        val++;
+        totalEl.innerText = val.toLocaleString();
+
+        document.getElementById('pledge-form').reset();
+        showToast("Your pledge has been added live to the wall!");
+      }
+
+      /* --- SEARCH MODAL LOGIC --- */
+      function toggleSearchModal() {
+        document.getElementById('search-modal').classList.toggle('hidden');
+      }
+
+      function performSearch() {
+        const query = document.getElementById('search-input').value.toLowerCase();
+        const resultsBox = document.getElementById('search-results');
+        if (!query) {
+          resultsBox.innerHTML = '<p class="text-slate-500 italic">Enter a keyword above to search resources and guides.</p>';
+          return;
+        }
+
+        const hits = resourcesList.filter(r => r.title.toLowerCase().includes(query) || r.desc.toLowerCase().includes(query));
+        if (hits.length === 0) {
+          resultsBox.innerHTML = '<p class="text-slate-400">No matching guides found. Try keywords like "bystander" or "parent".</p>';
+        } else {
+          resultsBox.innerHTML = hits.map(h => `
+            <div onclick="openResourceModal(${h.id}); toggleSearchModal()" class="p-2.5 rounded bg-charcoal hover:bg-navycard cursor-pointer border border-slate-700 flex justify-between items-center">
+              <div>
+                <h4 class="font-bold text-white text-xs">${h.title}</h4>
+                <p class="text-[10px] text-slate-400">${h.desc}</p>
+              </div>
+              <i class="fa-solid fa-arrow-right text-gold text-xs"></i>
+            </div>
+          `).join('');
+        }
+      }
+
+      /* --- CRISIS MODAL & BANNER --- */
+      function openCrisisModal() {
+        document.getElementById('crisis-modal').classList.remove('hidden');
+      }
+
+      function closeCrisisModal() {
+        document.getElementById('crisis-modal').classList.add('hidden');
+      }
+
+      function dismissCrisisBanner() {
+        document.getElementById('crisis-banner').style.display = 'none';
+      }
+
+      function copyToClipboard(text) {
+        navigator.clipboard.writeText(text);
+        showToast(`Copied ${text} to clipboard!`);
+      }
+
+      function handleNewsletter(e) {
+        e.preventDefault();
+        showToast("Thank you for subscribing to Safe Schools updates!");
+        e.target.reset();
+      }
+
+      function toggleMobileMenu() {
+        document.getElementById('mobile-menu').classList.toggle('hidden');
+      }
+
+      function showToast(msg) {
+        const toast = document.getElementById('toast');
+        document.getElementById('toast-text').innerText = msg;
+        toast.classList.remove('hidden');
+        setTimeout(() => toast.classList.add('hidden'), 3500);
+      }
+
+      /* --- INITIALIZE PAGE STATE --- */
+      window.onload = function() {
+        setHeroSlide(0);
+        switchPillarTab(0);
+        renderQuizStep(0);
+        renderResources('all');
+        renderPledges('All');
+      };
+    </script>
+</body>
+</html>
